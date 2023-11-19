@@ -15,15 +15,16 @@ function App() {
   const getResult = async() => {
     await axios.request(options).then((res) => setValue(res.data.results));
   };
+  setTimeout(() => {
   getResult()
-  // console.log(value);
+  },1000)
   return (
     <div className="main-sect">
       {
-        value.map(item => {
-          return <div className="card">
-          {/* <h1>{item}</h1> */}
-          <img src={(item.primaryImage.url)} style={{width:'300px',height:'300px'}} alt="" />
+        value.map((value) => {
+          return <div Key={value.id} className="card">
+          <h1>{(value.caption)}</h1>
+          <img src={(value.primaryImage.url)} style={{width:'300px',height:'300px'}} alt="" />
         </div>
         })
       }
