@@ -12,24 +12,28 @@ function App() {
       "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
     },
   };
-  const getResult = async() => {
+  const getResult = async () => {
     await axios.request(options).then((res) => setValue(res.data.results));
   };
   setTimeout(() => {
-  getResult()
-  },1000)
+    getResult();
+  }, 1000);
   return (
     <div className="main-sect">
-      {
-        value.map((value) => {
-          return <div Key={value.id} className="card">
-          <h1>{(value.caption)}</h1>
-          <img src={(value.primaryImage.url)} style={{width:'300px',height:'300px'}} alt="" />
-        </div>
-        })
-      }
+      {value.map((value) => {
+        return (
+          <div key={JSON.stringify(value.id)} className="card">
+            <img className="image"
+              src={value.primaryImage.url}
+              alt="movie image"
+            />
+            <h1>{(value.primaryImage.caption.plainText)}</h1>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 export default App;
+9
